@@ -20,10 +20,13 @@ export const getUsers = async () => {
 export const hiddenFlashcardByUser = async (user, id) => {
   const indexIdWatched = indexOfId(user.watched, id);
   const indexIdLearned = indexOfId(user.learned, id);
+  const indexIdCreated = indexOfId(user.created, id);
   indexIdWatched !== -1 &&
     user.watched.splice(indexIdWatched, indexIdWatched + 1);
   indexIdLearned !== -1 &&
-    user.learned.splice(indexIdLearned.indexIdLearned + 1);
+    user.learned.splice(indexIdLearned, indexIdLearned + 1);
+  indexIdCreated !== -1 &&
+    user.created.splice(indexIdCreated, indexIdCreated + 1);
   await updateUser(user.uid, {
     watched: user.watched,
     learned: user.learned,
